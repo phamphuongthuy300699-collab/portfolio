@@ -9,24 +9,32 @@ const expertiseAreas = [
         title: "PWA-приложения",
         description: "Мгновенный запуск по QR, офлайн-режим (IndexedDB), отсутствие необходимости скачивать из App Store и Play Market.",
         span: "col-span-1 md:col-span-2 row-span-2",
+        color: "from-amber-500/10 to-orange-600/5",
+        bgPattern: "radial-gradient(circle at top right, rgba(245,158,11,0.1), transparent 50%)"
     },
     {
         icon: <Smartphone className="w-8 h-8 opacity-80" />,
         title: "Нативные мобильные приложения",
         description: "iOS/Android разработка продуктов любой сложности и публикация в сторах.",
         span: "col-span-1 md:col-span-1 row-span-1",
+        color: "from-emerald-500/10 to-teal-600/5",
+        bgPattern: "radial-gradient(circle at bottom left, rgba(16,185,129,0.1), transparent 70%)"
     },
     {
         icon: <ShoppingCart className="w-8 h-8 opacity-80" />,
         title: "Delivery & E-commerce",
         description: "Разработка сайтов доставок с модулем корзины, эквайрингом и личным кабинетом гостя.",
         span: "col-span-1 md:col-span-1 row-span-1",
+        color: "from-rose-500/10 to-pink-600/5",
+        bgPattern: "radial-gradient(circle at top left, rgba(244,63,94,0.1), transparent 60%)"
     },
     {
         icon: <Server className="w-8 h-8 opacity-80" />,
         title: "Интеграции и Backend",
         description: "Связка с кассовыми системами (iiko, r_keeper, FrontPad), архитектура отказоустойчивых баз данных.",
         span: "col-span-1 md:col-span-2 row-span-1",
+        color: "from-blue-500/10 to-indigo-600/5",
+        bgPattern: "radial-gradient(circle at bottom right, rgba(59,130,246,0.1), transparent 50%)"
     }
 ];
 
@@ -48,7 +56,7 @@ export default function Expertise() {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px]">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-min md:auto-rows-[240px]">
                     {expertiseAreas.map((item, i) => (
                         <motion.div
                             key={i}
@@ -57,14 +65,16 @@ export default function Expertise() {
                             whileHover={{ y: -5, scale: 1.02 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.4, delay: i * 0.1 }}
-                            className={`glass-card rounded-[2rem] p-8 flex flex-col justify-between group ${item.span} cursor-default`}
+                            className={`glass-card rounded-[2rem] p-8 md:p-10 flex flex-col justify-between group ${item.span} cursor-default relative overflow-hidden bg-gradient-to-br ${item.color}`}
                         >
-                            <div className="bg-[var(--foreground)] text-[var(--background)] w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: item.bgPattern }} />
+
+                            <div className="relative z-10 bg-[var(--foreground)] text-[var(--background)] w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform flex-shrink-0">
                                 {item.icon}
                             </div>
-                            <div>
+                            <div className="relative z-10 flex-grow flex flex-col justify-end">
                                 <h3 className="text-xl md:text-2xl font-semibold mb-3">{item.title}</h3>
-                                <p className="opacity-70 leading-relaxed font-sans">{item.description}</p>
+                                <p className="opacity-80 leading-relaxed font-sans">{item.description}</p>
                             </div>
                         </motion.div>
                     ))}

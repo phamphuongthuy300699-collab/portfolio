@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
-import { Environment, Float, PresentationControls, RoundedBox } from "@react-three/drei";
+import { Environment, Float, PresentationControls, RoundedBox, Html } from "@react-three/drei";
 import { ArrowRight, MessageSquare } from "lucide-react";
 
 function PhonePlaceholder() {
@@ -19,27 +19,30 @@ function PhonePlaceholder() {
           <RoundedBox args={[2.5, 5, 0.2]} radius={0.2} smoothness={4}>
             <meshStandardMaterial color="#2D2D2D" roughness={0.1} metalness={0.8} />
           </RoundedBox>
-          {/* Screen */}
+          {/* Screen Bezels */}
           <RoundedBox args={[2.3, 4.8, 0.21]} radius={0.15} position={[0, 0, 0.01]} smoothness={4}>
             <meshStandardMaterial color="#000000" />
           </RoundedBox>
-          {/* Glowing Content / UI Placeholder on Screen */}
-          <mesh position={[0, 0, 0.12]}>
-            <planeGeometry args={[2.1, 4.6]} />
-            <meshBasicMaterial color="#1A1A1A" />
-          </mesh>
-          <mesh position={[0, 1.8, 0.13]}>
-            <planeGeometry args={[1.6, 0.3]} />
-            <meshBasicMaterial color="#333333" />
-          </mesh>
-          <mesh position={[0, 1.3, 0.13]}>
-            <planeGeometry args={[1.8, 0.5]} />
-            <meshBasicMaterial color="#444444" />
-          </mesh>
-          <mesh position={[0, 0.5, 0.13]}>
-            <planeGeometry args={[1.8, 0.8]} />
-            <meshBasicMaterial color="#333333" />
-          </mesh>
+          {/* Iframe Screen using Drei Html */}
+          <Html
+            transform
+            distanceFactor={1.16}
+            position={[0, 0, 0.12]}
+            style={{
+              width: "320px",
+              height: "665px",
+              borderRadius: "20px",
+              overflow: "hidden",
+              backgroundColor: "#000",
+              pointerEvents: "auto"
+            }}
+          >
+            <iframe
+              src="https://hochu-drugogo.vercel.app"
+              style={{ width: "100%", height: "100%", border: "none" }}
+              title="Gastro OS Demo"
+            />
+          </Html>
         </group>
       </PresentationControls>
     </Float>
@@ -119,7 +122,7 @@ export default function Hero() {
 
           {/* Tooltip for 3D */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs font-mono opacity-50 flex items-center gap-2">
-            <span>[Drag to rotate]</span>
+            <span>[Зажмите и потяните для вращения]</span>
           </div>
         </motion.div>
       </div>
