@@ -10,7 +10,8 @@ const expertiseAreas = [
         description: "Мгновенный запуск по QR, офлайн-режим (IndexedDB), отсутствие необходимости скачивать из App Store и Play Market.",
         span: "col-span-1 md:col-span-2 row-span-2",
         color: "from-amber-500/10 to-orange-600/5",
-        bgPattern: "radial-gradient(circle at top right, rgba(245,158,11,0.1), transparent 50%)"
+        bgPattern: "radial-gradient(circle at top right, rgba(245,158,11,0.1), transparent 50%)",
+        image: null
     },
     {
         icon: <Smartphone className="w-8 h-8 opacity-80" />,
@@ -18,7 +19,8 @@ const expertiseAreas = [
         description: "iOS/Android разработка продуктов любой сложности и публикация в сторах.",
         span: "col-span-1 md:col-span-1 row-span-1",
         color: "from-emerald-500/10 to-teal-600/5",
-        bgPattern: "radial-gradient(circle at bottom left, rgba(16,185,129,0.1), transparent 70%)"
+        bgPattern: "radial-gradient(circle at bottom left, rgba(16,185,129,0.1), transparent 70%)",
+        image: null
     },
     {
         icon: <ShoppingCart className="w-8 h-8 opacity-80" />,
@@ -26,7 +28,8 @@ const expertiseAreas = [
         description: "Разработка сайтов доставок с модулем корзины, эквайрингом и личным кабинетом гостя.",
         span: "col-span-1 md:col-span-1 row-span-1",
         color: "from-rose-500/10 to-pink-600/5",
-        bgPattern: "radial-gradient(circle at top left, rgba(244,63,94,0.1), transparent 60%)"
+        bgPattern: "radial-gradient(circle at top left, rgba(244,63,94,0.1), transparent 60%)",
+        image: "/assets/delivery_mockup.png"
     },
     {
         icon: <Server className="w-8 h-8 opacity-80" />,
@@ -34,7 +37,8 @@ const expertiseAreas = [
         description: "Связка с кассовыми системами (iiko, r_keeper, FrontPad), архитектура отказоустойчивых баз данных.",
         span: "col-span-1 md:col-span-2 row-span-1",
         color: "from-blue-500/10 to-indigo-600/5",
-        bgPattern: "radial-gradient(circle at bottom right, rgba(59,130,246,0.1), transparent 50%)"
+        bgPattern: "radial-gradient(circle at bottom right, rgba(59,130,246,0.1), transparent 50%)",
+        image: null
     }
 ];
 
@@ -72,9 +76,18 @@ export default function Expertise() {
                             <div className="relative z-10 bg-[var(--foreground)] text-[var(--background)] w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform flex-shrink-0">
                                 {item.icon}
                             </div>
+                            {item.image && (
+                                <div className="absolute top-0 right-0 w-full h-full opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none" style={{
+                                    backgroundImage: `url(${item.image})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                    mixBlendMode: 'overlay'
+                                }} />
+                            )}
+
                             <div className="relative z-10 flex-grow flex flex-col justify-end">
-                                <h3 className="text-xl md:text-2xl font-semibold mb-3">{item.title}</h3>
-                                <p className="opacity-80 leading-relaxed font-sans">{item.description}</p>
+                                <h3 className="text-xl md:text-2xl font-semibold mb-3 drop-shadow-md">{item.title}</h3>
+                                <p className="opacity-90 leading-relaxed font-sans drop-shadow-md bg-black/5 dark:bg-black/40 p-3 rounded-xl backdrop-blur-sm inline-block">{item.description}</p>
                             </div>
                         </motion.div>
                     ))}
