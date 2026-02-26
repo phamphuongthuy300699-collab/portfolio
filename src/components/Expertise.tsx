@@ -11,7 +11,7 @@ const expertiseAreas = [
         span: "col-span-1 md:col-span-2 row-span-2",
         color: "from-amber-500/10 to-orange-600/5",
         bgPattern: "radial-gradient(circle at top right, rgba(245,158,11,0.1), transparent 50%)",
-        image: null
+        image: "/assets/pwa_mockup.png"
     },
     {
         icon: <Smartphone className="w-8 h-8 opacity-80" />,
@@ -20,7 +20,7 @@ const expertiseAreas = [
         span: "col-span-1 md:col-span-1 row-span-1",
         color: "from-emerald-500/10 to-teal-600/5",
         bgPattern: "radial-gradient(circle at bottom left, rgba(16,185,129,0.1), transparent 70%)",
-        image: null
+        image: "/assets/native_app_mockup.png"
     },
     {
         icon: <ShoppingCart className="w-8 h-8 opacity-80" />,
@@ -38,7 +38,7 @@ const expertiseAreas = [
         span: "col-span-1 md:col-span-2 row-span-1",
         color: "from-blue-500/10 to-indigo-600/5",
         bgPattern: "radial-gradient(circle at bottom right, rgba(59,130,246,0.1), transparent 50%)",
-        image: null
+        image: "/assets/backend_dashboard.png"
     }
 ];
 
@@ -69,7 +69,7 @@ export default function Expertise() {
                             whileHover={{ y: -5, scale: 1.02 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.4, delay: i * 0.1 }}
-                            className={`glass-card rounded-[2rem] p-8 md:p-10 flex flex-col justify-between group ${item.span} cursor-default relative overflow-hidden bg-gradient-to-br ${item.color}`}
+                            className={`glass-card rounded-[2rem] p-8 md:p-10 flex flex-col justify-between group ${item.span} cursor-default relative overflow-hidden bg-gradient-to-br ${item.color} transform-gpu [transform:translateZ(0)]`}
                         >
                             <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: item.bgPattern }} />
 

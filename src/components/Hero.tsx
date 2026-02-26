@@ -2,52 +2,20 @@
 
 import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
-import { Environment, Float, PresentationControls, RoundedBox, Html } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { ArrowRight, MessageSquare } from "lucide-react";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
-function PhonePlaceholder() {
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-      <PresentationControls
-        global
-        rotation={[0, -0.3, 0]}
-        polar={[-Math.PI / 3, Math.PI / 3]}
-        azimuth={[-Math.PI / 1.4, Math.PI / 2]}
-      >
-        <group position={[0, 0, 0]}>
-          {/* Phone Body */}
-          <RoundedBox args={[2.5, 5, 0.2]} radius={0.2} smoothness={4}>
-            <meshStandardMaterial color="#2D2D2D" roughness={0.1} metalness={0.8} />
-          </RoundedBox>
-          {/* Screen Bezels */}
-          <RoundedBox args={[2.3, 4.8, 0.21]} radius={0.15} position={[0, 0, 0.01]} smoothness={4}>
-            <meshStandardMaterial color="#000000" />
-          </RoundedBox>
-          {/* Iframe Screen using Drei Html */}
-          <Html
-            transform
-            distanceFactor={1.16}
-            position={[0, 0, 0.12]}
-            style={{
-              width: "320px",
-              height: "665px",
-              borderRadius: "20px",
-              overflow: "hidden",
-              backgroundColor: "#000",
-              pointerEvents: "auto"
-            }}
-          >
-            <iframe
-              src="https://hochu-drugogo.vercel.app"
-              style={{ width: "100%", height: "100%", border: "none" }}
-              title="Gastro OS Demo"
-            />
-          </Html>
-        </group>
-      </PresentationControls>
-    </Float>
-  );
-}
+// Dynamically import the 3D Scene with disabled SSR for FCP/LCP optimization
+const Scene = dynamic(() => import("./Scene"), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="w-16 h-16 border-4 border-black/10 dark:border-white/10 border-t-black dark:border-t-white rounded-full animate-spin" />
+    </div>
+  )
+});
 
 export default function Hero() {
   return (
@@ -117,7 +85,9 @@ export default function Hero() {
             <ambientLight intensity={0.5} />
             <directionalLight position={[10, 10, 5]} intensity={1.5} />
             <Environment preset="city" />
-            <PhonePlaceholder />
+            <Suspense fallback={null}>
+              <Scene />
+            </Suspense>
           </Canvas>
 
           {/* Tooltip for 3D */}
