@@ -10,11 +10,7 @@ import { Suspense } from "react";
 // Dynamically import the 3D Scene with disabled SSR for FCP/LCP optimization
 const Scene = dynamic(() => import("./Scene"), {
   ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="w-16 h-16 border-4 border-black/10 dark:border-white/10 border-t-black dark:border-t-white rounded-full animate-spin" />
-    </div>
-  )
+  loading: () => null
 });
 
 export default function Hero() {
